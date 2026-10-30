@@ -414,7 +414,7 @@ const initialData = {
       upvote_count: 4,
       comment_count: 1,
       photo_urls: [
-        "https://images.unsplash.com/photo-1618477461853-cf6ed80fbea5?w=800",
+        "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?w=800",
       ],
       created_at: "2026-10-04T14:20:00.000Z",
     },
@@ -429,7 +429,7 @@ const initialData = {
     {
       id: "img-002",
       report_id: "rep-002",
-      image_url: "https://images.unsplash.com/photo-1618477461853-cf6ed80fbea5?w=800",
+      image_url: "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?w=800",
       created_at: "2026-10-04T14:20:00.000Z",
     },
   ],

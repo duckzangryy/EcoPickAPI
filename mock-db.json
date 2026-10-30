@@ -158,7 +158,7 @@
       "id": "evt-003",
       "title": "Phân loại rác tại nguồn - Trường ĐH Tây Nguyên",
       "description": "Workshop hướng dẫn phân loại rác hữu cơ, rác tái chế và rác nguy hại cho sinh viên và cư dân quanh trường.",
-      "cover_image_url": "https://images.unsplash.com/photo-1618477461853-cf6ed80fbea5?w=800&auto=format&fit=crop",
+      "cover_image_url": "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?w=800&auto=format&fit=crop",
       "type": "education",
       "start_date": "08/10/2026 08:00:00",
       "end_date": "08/10/2026 10:30:00",
@@ -463,7 +463,7 @@
       "upvote_count": 4,
       "comment_count": 1,
       "photo_urls": [
-        "https://images.unsplash.com/photo-1618477461853-cf6ed80fbea5?w=800"
+        "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?w=800"
       ],
       "created_at": "2026-10-04T14:20:00.000Z"
     }
