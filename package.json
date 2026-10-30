@@ -1,0 +1,24 @@
+{
+  "name": "ecopick-vercel-api",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "vercel dev",
+    "db:seed": "node scripts/seed.js",
+    "test": "node tests/auth.test.js && node tests/upload.test.js && node tests/reports-authz.test.js && node tests/pii.test.js && node tests/cron.test.js && node tests/photos-cache.test.js && node tests/observability.test.js",
+    "check": "node --check api/index.js && node --check scripts/seed.js"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.2",
+    "@vercel/blob": "^2.8.2",
+    "bcryptjs": "^3.0.2",
+    "busboy": "^1.6.0",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "vercel": "^64.5.0"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "functions": {
+    "api/index.js": { "maxDuration": 10 }
+  },
+  "crons": [{ "path": "/api/cron/cleanup", "schedule": "30 3 * * *" }],
+  "headers": [
+    {
+      "source": "/",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=60, stale-while-revalidate=600" }
+      ]
+    },
+    {
+      "source": "/opendesign/mockups/daklak-map",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=60, stale-while-revalidate=600" }
+      ]
+    },
+    {
+      "source": "/opendesign/mockups/daklak-map/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=60, stale-while-revalidate=600" }
+      ]
+    },
+    {
+      "source": "/(og-image|favicon)\\.png",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, s-maxage=604800, stale-while-revalidate=604800" }
+      ]
+    },
+    {
+      "source": "/(robots\\.txt|sitemap\\.xml)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    }
+  ],
+  "rewrites": [
+    { "source": "/opendesign/mockups/daklak-map", "destination": "/opendesign/mockups/daklak-map/index.html" },
+    { "source": "/opendesign/mockups/daklak-map/", "destination": "/opendesign/mockups/daklak-map/index.html" },
+    { "source": "/api/v1/notifications/unread-count", "destination": "/api?route=/api/v1/notifications/unread-count" },
+    { "source": "/api/v1/notifications/read-all", "destination": "/api?route=/api/v1/notifications/read-all" },
+    { "source": "/api/v1/feed/discover", "destination": "/api?route=/api/v1/feed/discover" },
+    { "source": "/api/v1/reports/nearby", "destination": "/api?route=/api/v1/reports/nearby" },
+    { "source": "/api/v1/events/nearby", "destination": "/api?route=/api/v1/events/nearby" },
+    { "source": "/api/v1/events/:id/join", "destination": "/api?route=/api/v1/events/:id/join" },
+    { "source": "/api/v1/events/:id/check-in", "destination": "/api?route=/api/v1/events/:id/check-in" },
+    { "source": "/api/v1/reports/:id/upvote", "destination": "/api?route=/api/v1/reports/:id/upvote" },
+    { "source": "/api/v1/reports/:id/claim", "destination": "/api?route=/api/v1/reports/:id/claim" },
+    { "source": "/api/v1/reports/:id/status", "destination": "/api?route=/api/v1/reports/:id/status" },
+    { "source": "/api/v1/reports/:id/comments", "destination": "/api?route=/api/v1/reports/:id/comments" },
+    { "source": "/api/v1/users/me/streak", "destination": "/api?route=/api/v1/users/me/streak" },
+    { "source": "/api/ai/scan", "destination": "/api?route=/api/ai/scan" },
+    { "source": "/api/:path*/", "destination": "/api?route=/api/:path*/" },
+    { "source": "/api/:path*", "destination": "/api?route=/api/:path*" },
+    { "source": "/health/ready/", "destination": "/api?route=/health/ready" },
+    { "source": "/health/ready", "destination": "/api?route=/health/ready" },
+    { "source": "/health/", "destination": "/api?route=/health" },
+    { "source": "/health", "destination": "/api?route=/health" }
+  ]
+}

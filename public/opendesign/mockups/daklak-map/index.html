@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bản đồ điểm nóng rác thải Đắk Lắk — EcoPick</title>
+<meta name="description" content="Bản đồ công khai các điểm nóng rác thải tại Đắk Lắk: vị trí, mức độ và ảnh hiện trường do cộng đồng gửi lên, cập nhật liên tục.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#1D4A38">
+<link rel="canonical" href="https://ecopick-api-iota.vercel.app/opendesign/mockups/daklak-map/">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EcoPick">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Bản đồ điểm nóng rác thải Đắk Lắk — EcoPick">
+<meta property="og:description" content="Xem vị trí, mức độ và ảnh hiện trường các điểm nóng rác thải tại Đắk Lắk trên bản đồ cộng đồng.">
+<meta property="og:url" content="https://ecopick-api-iota.vercel.app/opendesign/mockups/daklak-map/">
+<meta property="og:image" content="https://ecopick-api-iota.vercel.app/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Bản đồ điểm nóng rác thải Đắk Lắk của EcoPick">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bản đồ điểm nóng rác thải Đắk Lắk — EcoPick">
+<meta name="twitter:description" content="Xem vị trí, mức độ và ảnh hiện trường các điểm nóng rác thải tại Đắk Lắk trên bản đồ cộng đồng.">
+<meta name="twitter:image" content="https://ecopick-api-iota.vercel.app/og-image.png">
+<meta name="twitter:image:alt" content="Bản đồ điểm nóng rác thải Đắk Lắk của EcoPick">
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<link rel="preconnect" href="https://tile.openstreetmap.org">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Bản đồ điểm nóng rác thải Đắk Lắk — EcoPick",
+  "description": "Bản đồ công khai các điểm nóng rác thải tại Đắk Lắk: vị trí, mức độ và ảnh hiện trường do cộng đồng gửi lên.",
+  "url": "https://ecopick-api-iota.vercel.app/opendesign/mockups/daklak-map/",
+  "inLanguage": "vi-VN",
+  "isPartOf": {
+    "@type": "WebApplication",
+    "name": "EcoPick",
+    "url": "https://ecopickapp.vercel.app/"
+  },
+  "about": {
+    "@type": "Place",
+    "name": "Đắk Lắk",
+    "address": { "@type": "PostalAddress", "addressRegion": "Đắk Lắk", "addressCountry": "VN" }
+  }
+}
+</script>
+<style>
+:root{
+  --paper:#FAF6EE; --card:#FFFFFF; --ink:#1C1917; --muted:#78716C;
+  --line:#E7DFD2; --coffee:#9A5B1E;
+  --forest:#1D4A38; --forest-soft:#E4EDE7;
+  --danger:#B3261E; --radius:14px;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font-family:"Be Vietnam Pro",system-ui,sans-serif;background:var(--paper);color:var(--ink);overflow:hidden}
+#map{position:absolute;inset:0;-webkit-user-select:none;user-select:none}
+#toast{position:absolute;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;transition:.3s;z-index:900;background:var(--ink);color:#fff;padding:13px 20px;border-radius:12px;font-size:13.5px;max-width:min(520px,90%);box-shadow:0 10px 30px rgba(0,0,0,.3);pointer-events:none}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast.ok{background:var(--forest)}
+.coords{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--forest);margin-top:3px}
+.badge{display:inline-block;font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:999px;margin-top:6px;margin-right:4px;letter-spacing:.02em}
+.b-exif{background:#DDF3E2;color:#14532D}
+.b-manual{background:#FDE8CD;color:#7A4514}
+.b-outside{background:#FDE2E2;color:var(--danger)}
+.photo-marker{width:48px;height:48px;aspect-ratio:1/1;border-radius:6px;border:3px solid #fff;box-shadow:0 3px 12px rgba(0,0,0,.35);object-fit:cover;background:#ddd}.photo-marker.no-image{display:grid;place-items:center;border-radius:50%;background:#1D4A38;color:#fff;font-size:22px;font-weight:700}
+.photo-marker.outside{border-color:#E5484D}
+.photo-marker.manual{border-color:#F59E0B}
+/* Màu viền theo mức nghiêm trọng — đồng bộ với Marker của app */
+.photo-marker.sev-light{border-color:#16A34A}
+.photo-marker.sev-medium{border-color:#F59E0B}
+.photo-marker.sev-heavy{border-color:#EF4444}
+.photo-marker.sev-extreme{border-color:#8B5CF6}
+/* Google Maps Navigation Puck & Markers */
+.nav-puck-outer{width:24px;height:24px;border-radius:50%;background:rgba(26,115,232,0.28);display:flex;align-items:center;justify-content:center;animation:navPuckPulse 2s infinite ease-out}
+.nav-puck-inner{width:14px;height:14px;border-radius:50%;background:#1A73E8;border:2.5px solid #FFFFFF;box-shadow:0 1px 4px rgba(0,0,0,0.4)}
+@keyframes navPuckPulse{0%{box-shadow:0 0 0 0 rgba(26,115,232,0.7)}70%{box-shadow:0 0 0 14px rgba(26,115,232,0)}100%{box-shadow:0 0 0 0 rgba(26,115,232,0)}}
+.nav-dest-flag{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:#EA4335;border:2.5px solid #FFFFFF;box-shadow:0 3px 10px rgba(0,0,0,0.35);font-size:17px;line-height:1}
+.leaflet-popup-content{font-family:"Be Vietnam Pro",sans-serif!important;margin:14px 16px!important;line-height:1.5}
+.leaflet-popup-content img{width:220px;height:220px;max-width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px}
+.leaflet-popup-content h3{margin:8px 0 2px;font-size:14px}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div id="toast"></div>
+<noscript><div style="position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;background:#FAF6EE;z-index:1000;font-family:system-ui,sans-serif"><div><h1 style="font-size:22px">Bản đồ điểm nóng rác thải Đắk Lắk</h1><p>Trang bản đồ cần JavaScript. Xem bản đồ trong ứng dụng tại <a href="https://ecopickapp.vercel.app/map">ecopickapp.vercel.app/map</a>.</p></div></div></noscript>
+
+<script>
+const DAKLAK_BOUNDS = [[12.02,107.62],[13.12,108.97]];
+const API = '/api/photos';
+const SEVERITY_COLORS = {light:'#16A34A',medium:'#F59E0B',heavy:'#EF4444',extreme:'#8B5CF6'};
+let photos = [];
+let markers = {};
+let lastSync = '';
+let lastCount = null;
+let routeLines = [];
+// Khi app native tự đẩy marker xuống thì không polling /api/photos nữa
+let useRemote = true;
+// Bỏ qua sự kiện moveend do chính lệnh điều khiển từ app gây ra.
+// Khởi tạo true để fitBounds lúc load không đè vùng bản đồ app đang chờ.
+let suppressMove = true;
+
+/** Gửi sự kiện về app: native dùng WebView bridge, web dùng iframe postMessage. */
+function send(payload){
+  const msg = JSON.stringify(payload);
+  if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
+    window.ReactNativeWebView.postMessage(msg);
+    return;
+  }
+  try{
+    if(window.parent && window.parent !== window) window.parent.postMessage(payload,'*');
+  }catch(e){}
+}
+
+// Map init — cho phep di chuyen, phong to thu nho thoai mai
+const map = L.map('map', {
+  zoomControl: false,
+  minZoom: 6,
+  maxZoom: 19,
+  dragging: true,
+  touchZoom: true,
+  scrollWheelZoom: true,
+  doubleClickZoom: true,
+  boxZoom: false,
+  keyboard: true,
+  tap: false,
+  maxBoundsViscosity: 0.5
+}).setView([12.62,108.30],10);
+L.control.zoom({position:'bottomright'}).addTo(map);
+map.fitBounds(DAKLAK_BOUNDS,{padding:[24,24]});
+map.setMaxBounds([[8.0, 100.0], [25.0, 115.0]]);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map);
+L.control.scale({position:'bottomleft'}).addTo(map);
+let autoFitTimer = setTimeout(()=>{map.invalidateSize();map.fitBounds(DAKLAK_BOUNDS,{padding:[24,24]});suppressMove=false;},300);
+window.addEventListener('resize',()=>map.invalidateSize());
+// Nhãn tỉnh
+L.marker([12.15,108.72],{interactive:false,icon:L.divIcon({className:'',html:'<div style="font-weight:800;font-size:13px;letter-spacing:.14em;color:#7A4514;background:rgba(255,253,247,.85);border:1px solid #E7DFD2;padding:4px 12px;border-radius:999px">TỈNH ĐẮK LẮK</div>',iconSize:[120,24],iconAnchor:[60,12]})}).addTo(map);
+
+function toast(msg,type=''){const t=document.getElementById('toast');t.textContent=msg;t.className='show '+type;clearTimeout(t._h);t._h=setTimeout(()=>t.className='',3200)}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+function getMarkerImage(p) {
+  const img = p.thumb || p.image_url || p.image || p.url || (Array.isArray(p.photo_urls) && p.photo_urls[0]) || '';
+  if (!img) return '';
+  if (/^(https?:|data:|blob:)/i.test(img)) return img;
+  return '/' + img.replace(/^\//, '');
+}
+
+function photoIcon(p){
+  const sev = p.severity ? 'sev-' + String(p.severity) : '';
+  const cls = !p.lat?'pending':(!p.hasGps?'manual':'')+(p.outside?' outside':'');
+  const imgUrl = getMarkerImage(p);
+  const html = imgUrl
+    ? `<img class="photo-marker ${cls} ${sev}" src="${escapeHtml(imgUrl)}" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'photo-marker no-image ${sev}',textContent:'📍'}))">`
+    : `<div class="photo-marker no-image ${sev}">📍</div>`;
+  return L.divIcon({className:'',html,iconSize:[46,46],iconAnchor:[23,23],popupAnchor:[0,-22]});
+}
+function popupHtml(p){
+  const src = p.hasGps?'<span class="badge b-exif">GPS từ EXIF</span>':(p.severity?'':'<span class="badge b-manual">Ghim tay</span>');
+  const out = p.outside?'<span class="badge b-outside">Ngoài Đắk Lắk</span>':'';
+  const coord = `<div class="coords">${Number(p.lat).toFixed(6)}, ${Number(p.lng).toFixed(6)}</div>`;
+  const ex = p.exif&&p.exif.datetime?`<div style="font-size:11.5px;color:#78716C">📅 ${escapeHtml(p.exif.datetime)}${p.exif.model?' · '+escapeHtml(p.exif.model):''}</div>`:'';
+  const who = p.userid&&p.userid!==p.name?`<div style="font-size:11.5px;color:#78716C">👤 ${escapeHtml(p.userid)}</div>`:'';
+  const titleHtml = p.title&&p.title!==p.name?`<div style="font-size:12px;color:#333;margin-top:2px">📍 ${escapeHtml(p.title)}</div>`:'';
+  const imgUrl = getMarkerImage(p);
+  const image = imgUrl ? `<img src="${escapeHtml(imgUrl)}" loading="lazy" decoding="async" width="220" height="220" onerror="this.style.display='none'">` : '';
+  const name = p.name || p.title || 'Báo cáo';
+  const detailBtn = `<button onclick="try{window.__ecopickView('${escapeHtml(p.id)}')}catch(e){}" style="width:100%;margin-top:10px;padding:8px 12px;background:#1D4A38;color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer">Xem chi tiết báo cáo ➔</button>`;
+  return `${image}<h3>${escapeHtml(name)}</h3>${titleHtml}${coord}${ex}${who}<div>${src}${out}</div>${detailBtn}`;
+}
+
+window.__ecopickView = function(reportId){ send({type:'ECOPICK_VIEW_REPORT', reportId:String(reportId)}); };
+
+function renderMarkers(){
+  Object.values(markers).forEach(m=>map.removeLayer(m));markers={};
+  photos.forEach(p=>{
+    if(!p.lat) return;
+    const m = L.marker([p.lat,p.lng],{icon:photoIcon(p)}).addTo(map).bindPopup(popupHtml(p));
+    m.on('click', () => {
+      send({type:'ECOPICK_SELECT_REPORT', reportId: p.id, photo: p});
+    });
+    markers[p.id]=m;
+  });
+}
+
+let navMarkers = [];
+function renderRoute(lines){
+  if (routeLines.length) { routeLines.forEach(l => map.removeLayer(l)); routeLines = []; }
+  if (navMarkers.length) { navMarkers.forEach(m => map.removeLayer(m)); navMarkers = []; }
+  if (!lines || !lines.length) return;
+  let allCoords = [];
+  lines.forEach(l => {
+    const coords = (l.coordinates || []).map(c => [c.latitude, c.longitude]);
+    if (coords.length < 2) return;
+    allCoords = allCoords.concat(coords);
+    const casing = L.polyline(coords, {
+      color: '#1A73E8',
+      weight: (l.width || 6) + 3,
+      opacity: 0.95,
+      lineCap: 'round',
+      lineJoin: 'round',
+    }).addTo(map);
+    const core = L.polyline(coords, {
+      color: l.color && l.color !== '#20693A' ? l.color : '#4285F4',
+      weight: l.width || 6,
+      opacity: 1.0,
+      lineCap: 'round',
+      lineJoin: 'round',
+    }).addTo(map);
+    routeLines.push(casing, core);
+  });
+  if (allCoords.length >= 2) {
+    const startPoint = allCoords[0];
+    const endPoint = allCoords[allCoords.length - 1];
+    const startIcon = L.divIcon({className:'',html:'<div class="nav-puck-outer"><div class="nav-puck-inner"></div></div>',iconSize:[24,24],iconAnchor:[12,12]});
+    const startMarker = L.marker(startPoint,{icon:startIcon,interactive:false,zIndexOffset:1000}).addTo(map);
+    const endIcon = L.divIcon({className:'',html:'<div class="nav-dest-flag">🏁</div>',iconSize:[34,34],iconAnchor:[17,17]});
+    const endMarker = L.marker(endPoint,{icon:endIcon,interactive:false,zIndexOffset:1000}).addTo(map);
+    navMarkers.push(startMarker, endMarker);
+    suppressMove = true;
+    map.fitBounds(allCoords, {padding:[70,70], maxZoom:16});
+    setTimeout(()=>{suppressMove=false;},800);
+  }
+}
+
+async function fetchShared(){
+  if (!useRemote) return;
+  try{
+    const r = await fetch(API);
+    if(!r.ok) throw 0;
+    const d = await r.json();
+    const arr = Array.isArray(d)?d:(d.photos||[]);
+    const n = arr.filter(x=>x.lat).length;
+    const s = JSON.stringify(arr);
+    if(s!==lastSync){
+      lastSync=s;photos=arr;renderMarkers();
+      if(lastCount!==null&&n>lastCount) toast('Có '+(n-lastCount)+' ảnh mới trên bản đồ','ok');
+      lastCount=n;
+    }
+  }catch(e){
+    /* ngoại tuyến: giữ ảnh cũ */
+  }
+}
+
+// ── Lệnh từ app native (WebView.injectJavaScript gọi trực tiếp) ──
+map.on('moveend', () => {
+  if (suppressMove) return;
+  const c = map.getCenter();
+  const b = map.getBounds();
+  send({
+    type: 'ECOPICK_REGION_CHANGED',
+    latitude: c.lat,
+    longitude: c.lng,
+    latitudeDelta: b.getNorth() - b.getSouth(),
+    longitudeDelta: b.getEast() - b.getWest(),
+  });
+});
+map.on('movestart', () => { if (!suppressMove) { const c=map.getCenter(); send({type:'ECOPICK_REGION_CHANGING',latitude:c.lat,longitude:c.lng}); } });
+map.on('click', () => send({type:'ECOPICK_MAP_PRESS'}));
+
+window.ECOPICK_CMD = function(raw){
+  let cmd;
+  try { cmd = typeof raw === 'string' ? JSON.parse(raw) : raw; } catch (e) { return; }
+  if (!cmd || !cmd.type) return;
+
+  // Lệnh đầu tiên từ app thay thế vùng mặc định Đắk Lắk
+  if (autoFitTimer) { clearTimeout(autoFitTimer); autoFitTimer = null; }
+
+  if (cmd.type === 'ECOPICK_SET_MARKERS') {
+    useRemote = false;
+    photos = (cmd.markers || []).map(m => ({
+      id: String(m.id),
+      lat: Number(m.latitude),
+      lng: Number(m.longitude),
+      name: m.title || 'Báo cáo',
+      severity: m.severity || '',
+      image: m.image || '',
+      hasGps: true,
+    }));
+    renderMarkers();
+    return;
+  }
+
+  if (cmd.type === 'ECOPICK_SET_REGION') {
+    suppressMove = true;
+    if (cmd.animate) map.flyTo([cmd.latitude, cmd.longitude], zoomFor(cmd.latitudeDelta), {duration: 0.6});
+    else map.setView([cmd.latitude, cmd.longitude], zoomFor(cmd.latitudeDelta), {animate: false});
+    setTimeout(() => { suppressMove = false; }, 700);
+    return;
+  }
+
+  if (cmd.type === 'ECOPICK_FIT_COORDS') {
+    const pts = (cmd.coords || []).map(c => [c.latitude, c.longitude]);
+    if (pts.length) { suppressMove = true; map.fitBounds(pts, {padding: [60, 60], maxZoom: 16}); setTimeout(() => { suppressMove = false; }, 700); }
+    return;
+  }
+
+  if (cmd.type === 'ECOPICK_SET_ROUTE') {
+    renderRoute(cmd.lines || []);
+    return;
+  }
+
+  if (cmd.type === 'ECOPICK_CLEAR_ROUTE') {
+    renderRoute([]);
+    return;
+  }
+};
+
+/** Đổi latitudeDelta (đơn vị độ) sang zoom của Leaflet. */
+function zoomFor(delta){
+  if (!delta || !isFinite(delta)) return 13;
+  const z = Math.log2(360 / Math.max(Number(delta), 1e-6)) - 1;
+  return Math.max(6, Math.min(19, Math.round(z)));
+}
+
+// Nhận lệnh điều khiển từ app (web: iframe contentWindow.postMessage)
+window.addEventListener('message', (ev) => {
+  if (ev.source && ev.data && (ev.data.type || '').startsWith('ECOPICK_')) window.ECOPICK_CMD(ev.data);
+});
+
+renderMarkers();fetchShared();setInterval(fetchShared,4000);
+send({type:'ECOPICK_READY'});
+</script>
+</body>
+</html>

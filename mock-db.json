@@ -1,0 +1,478 @@
+{
+  "users": [
+    {
+      "id": "user-admin-local-001",
+      "email": "admin@ecopick.vn",
+      "password": "123456",
+      "fullname": "EcoPick Admin",
+      "phone_number": "0987654321",
+      "address": "Quận 1, TP. Hồ Chí Minh",
+      "date_of_birth": "2000-01-01",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400",
+      "bio": "Tình nguyện viên tích cực vì một Việt Nam xanh - sạch - đẹp 🌿",
+      "role": {
+        "id": "role-admin",
+        "name": "admin"
+      },
+      "level": 5,
+      "eco_points": 1300,
+      "total_reports": 13,
+      "total_events": 8,
+      "total_trees": 25,
+      "followers_count": 142,
+      "following_count": 38,
+      "is_verified": true,
+      "is_staff": true,
+      "updated_at": "2026-10-15T13:29:35.801Z"
+    },
+    {
+      "id": "user-volunteer-002",
+      "email": "volunteer@ecopick.vn",
+      "password": "123456",
+      "fullname": "Nguyễn Văn Xanh",
+      "phone_number": "0912345678",
+      "address": "Buôn Ma Thuột, Đắk Lắk",
+      "date_of_birth": "1998-05-15",
+      "avatar": "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400",
+      "bio": "Yêu thiên nhiên và bảo vệ môi trường cao nguyên",
+      "role": {
+        "id": "role-user",
+        "name": "user"
+      },
+      "level": 3,
+      "eco_points": 620,
+      "total_reports": 5,
+      "total_events": 4,
+      "total_trees": 10,
+      "followers_count": 56,
+      "following_count": 22,
+      "is_verified": true,
+      "is_staff": false
+    },
+    {
+      "id": "user-1792068837464",
+      "email": "test_user_01@ecopick.vn",
+      "password": "newpassword123",
+      "fullname": "Test User 01",
+      "full_name": "Test User 01",
+      "username": "testuser01",
+      "phone_number": "",
+      "address": "",
+      "date_of_birth": null,
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400",
+      "avatar_url": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400",
+      "bio": "Người bảo vệ môi trường 🌿",
+      "role": {
+        "id": "role-user",
+        "name": "user"
+      },
+      "level": 1,
+      "eco_points": 50,
+      "total_reports": 0,
+      "total_events": 0,
+      "total_trees": 0,
+      "followers_count": 0,
+      "follower_count": 0,
+      "following_count": 0,
+      "is_verified": true,
+      "is_active": true,
+      "is_staff": false,
+      "created_at": "2026-10-15T12:53:57.464Z",
+      "updated_at": "2026-10-15T12:55:11.346Z"
+    }
+  ],
+  "roles": [
+    {
+      "id": "role-admin",
+      "name": "admin"
+    },
+    {
+      "id": "role-organizer",
+      "name": "organizer"
+    },
+    {
+      "id": "role-moderator",
+      "name": "moderator"
+    },
+    {
+      "id": "role-user",
+      "name": "user"
+    }
+  ],
+  "otps": {
+    "admin@ecopick.vn": {
+      "otp": "123456",
+      "expiresAt": 1792071699791
+    },
+    "test_user_01@ecopick.vn": {
+      "otp": "123456",
+      "expiresAt": 1792069800013
+    }
+  },
+  "events": [
+    {
+      "id": "evt-001",
+      "title": "Chủ Nhật Xanh: Dọn rác bờ hồ Ea Kao",
+      "description": "Chiến dịch làm sạch lòng hồ Ea Kao cùng các tình nguyện viên TP. Buôn Ma Thuột. Cùng nhau thu gom rác nhựa và tạo cảnh quan sạch đẹp.",
+      "cover_image_url": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&auto=format&fit=crop",
+      "type": "clean up",
+      "start_date": "15/10/2026 07:30:00",
+      "end_date": "15/10/2026 11:30:00",
+      "latitude": 12.605,
+      "longitude": 108.067,
+      "location": "Hồ Ea Kao",
+      "address": "Xã Ea Kao, TP. Buôn Ma Thuột, Đắk Lắk",
+      "max_paticipants": 50,
+      "current_paticipants": 32,
+      "equipment": "Găng tay bảo hộ, kẹp rác, túi rác tự huỷ, nước uống",
+      "difficulty": "medium",
+      "eco_point_reward": 100,
+      "status": "upcoming",
+      "created_at": "2026-10-01T08:00:00.000Z",
+      "updated_at": "2026-10-01T08:00:00.000Z",
+      "organizer_id": "user-admin-local-001"
+    },
+    {
+      "id": "evt-002",
+      "title": "Trồng 500 cây xanh chắn gió Buôn Đôn",
+      "description": "Hoạt động phủ xanh đồi trọc, bảo vệ nguồn nước và chống xói mòn đất vùng biên giới Buôn Đôn.",
+      "cover_image_url": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&auto=format&fit=crop",
+      "type": "tree planting",
+      "start_date": "20/10/2026 06:30:00",
+      "end_date": "20/10/2026 12:00:00",
+      "latitude": 12.898,
+      "longitude": 107.784,
+      "location": "Huyện Buôn Đôn",
+      "address": "Xã Krông Na, Huyện Buôn Đôn, Đắk Lắk",
+      "max_paticipants": 80,
+      "current_paticipants": 65,
+      "equipment": "Cuốc xẻng, cây giống, cọc chống",
+      "difficulty": "hard",
+      "eco_point_reward": 150,
+      "status": "upcoming",
+      "created_at": "2026-10-02T09:00:00.000Z",
+      "updated_at": "2026-10-02T09:00:00.000Z",
+      "organizer_id": "user-admin-local-001"
+    },
+    {
+      "id": "evt-003",
+      "title": "Phân loại rác tại nguồn - Trường ĐH Tây Nguyên",
+      "description": "Workshop hướng dẫn phân loại rác hữu cơ, rác tái chế và rác nguy hại cho sinh viên và cư dân quanh trường.",
+      "cover_image_url": "https://images.unsplash.com/photo-1618477461853-cf6ed80fbea5?w=800&auto=format&fit=crop",
+      "type": "education",
+      "start_date": "08/10/2026 08:00:00",
+      "end_date": "08/10/2026 10:30:00",
+      "latitude": 12.657,
+      "longitude": 108.035,
+      "location": "Đại học Tây Nguyên",
+      "address": "567 Lê Duẩn, TP. Buôn Ma Thuột",
+      "max_paticipants": 100,
+      "current_paticipants": 78,
+      "equipment": "Tài liệu tập huấn, thùng rác phân loại mẫu",
+      "difficulty": "easy",
+      "eco_point_reward": 50,
+      "status": "ongoing",
+      "created_at": "2026-09-28T10:00:00.000Z",
+      "updated_at": "2026-09-28T10:00:00.000Z",
+      "organizer_id": "user-admin-local-001"
+    }
+  ],
+  "event_participants": [
+    {
+      "id": "ep-001",
+      "event": "evt-001",
+      "user": "user-admin-local-001",
+      "status": "joined",
+      "joined_at": "2026-10-02T10:00:00.000Z",
+      "checked_in_at": null,
+      "participant": {
+        "id": "user-admin-local-001",
+        "fullname": "EcoPick Admin",
+        "email": "admin@ecopick.vn",
+        "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400"
+      }
+    }
+  ],
+  "tour_stops": [
+    {
+      "id": "ts-001",
+      "event_id": "evt-001",
+      "title": "Điểm tập kết số 1 - Cầu Ea Kao",
+      "description": "Tập hợp lực lượng, phát dụng cụ và găng tay",
+      "latitude": 12.606,
+      "longitude": 108.066,
+      "order": 1
+    },
+    {
+      "id": "ts-002",
+      "event_id": "evt-001",
+      "title": "Điểm thu gom số 2 - Bờ tây hồ",
+      "description": "Khu vực tập trung nhiều rác thải nhựa sau mùa lễ hội",
+      "latitude": 12.604,
+      "longitude": 108.069,
+      "order": 2
+    }
+  ],
+  "posts": [
+    {
+      "id": "post-001",
+      "author_id": "user-admin-local-001",
+      "author": {
+        "id": "user-admin-local-001",
+        "fullname": "EcoPick Admin",
+        "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400"
+      },
+      "content": "Hôm nay nhóm tình nguyện đã dọn sạch hơn 120kg rác nhựa tại công viên! Cảm ơn mọi người đã tham gia nhiệt tình 🌿💪",
+      "media_urls": [
+        "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=800"
+      ],
+      "likes_count": 24,
+      "comments_count": 6,
+      "created_at": "2026-10-03T14:20:00.000Z"
+    }
+  ],
+  "comments": [
+    {
+      "id": "cmt-001",
+      "post_id": "post-001",
+      "user_id": "user-volunteer-002",
+      "user": {
+        "id": "user-volunteer-002",
+        "fullname": "Nguyễn Văn Xanh",
+        "avatar": "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400"
+      },
+      "content": "Tuyệt vời quá! Chủ nhật tuần này mình cũng đăng ký tham gia tiếp.",
+      "created_at": "2026-10-03T15:00:00.000Z"
+    }
+  ],
+  "badges": [
+    {
+      "id": "badge-001",
+      "name": "Tân binh Xanh",
+      "description": "Tham gia báo cáo điểm rác đầu tiên trên hệ thống",
+      "icon_url": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+      "category": "report"
+    },
+    {
+      "id": "badge-002",
+      "name": "Chiến binh Nhặt rác",
+      "description": "Hoàn thành 5 chiến dịch dọn vệ sinh môi trường",
+      "icon_url": "https://cdn-icons-png.flaticon.com/512/2854/2854298.png",
+      "category": "event"
+    },
+    {
+      "id": "badge-003",
+      "name": "Người Trồng Rừng",
+      "description": "Đã đóng góp trồng trên 20 cây xanh",
+      "icon_url": "https://cdn-icons-png.flaticon.com/512/628/628283.png",
+      "category": "tree"
+    },
+    {
+      "id": "badge-004",
+      "name": "Đại Sứ EcoPick",
+      "description": "Đạt mốc 1000 điểm Eco Points và hoạt động tích cực",
+      "icon_url": "https://cdn-icons-png.flaticon.com/512/2583/2583344.png",
+      "category": "special"
+    }
+  ],
+  "user_badges": [
+    {
+      "id": "ub-001",
+      "user_id": "user-admin-local-001",
+      "badge_id": "badge-001",
+      "badge": {
+        "id": "badge-001",
+        "name": "Tân binh Xanh",
+        "description": "Tham gia báo cáo điểm rác đầu tiên trên hệ thống",
+        "icon_url": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+        "category": "report"
+      }
+    },
+    {
+      "id": "ub-002",
+      "user_id": "user-admin-local-001",
+      "badge_id": "badge-004",
+      "badge": {
+        "id": "badge-004",
+        "name": "Đại Sứ EcoPick",
+        "description": "Đạt mốc 1000 điểm Eco Points và hoạt động tích cực",
+        "icon_url": "https://cdn-icons-png.flaticon.com/512/2583/2583344.png",
+        "category": "special"
+      }
+    }
+  ],
+  "exchange_items": [
+    {
+      "id": "ex-001",
+      "title": "Một ly cà phê size vừa",
+      "description": "Đổi một ly cà phê size vừa tại cửa hàng đối tác.",
+      "points_cost": 300,
+      "image_url": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400",
+      "sponsor": "Highlands Coffee",
+      "category": "beverage",
+      "available_quantity": 45
+    },
+    {
+      "id": "ex-002",
+      "title": "Một chai nước suối",
+      "description": "Nhận một chai nước suối tại điểm đổi quà đối tác.",
+      "points_cost": 100,
+      "image_url": "https://images.unsplash.com/photo-1523362628745-0c100150b3a2?w=400",
+      "sponsor": "Nhà tài trợ EcoPick",
+      "category": "beverage",
+      "available_quantity": 80
+    },
+    {
+      "id": "ex-003",
+      "title": "Voucher giảm 50.000đ",
+      "description": "Voucher mua sắm thân thiện môi trường, dùng một lần.",
+      "points_cost": 250,
+      "image_url": "https://images.unsplash.com/photo-1544816155-12df9643f363?w=400",
+      "sponsor": "EcoMart",
+      "category": "voucher",
+      "available_quantity": 100
+    }
+  ],
+  "conversations": [
+    {
+      "id": "conv-001",
+      "title": "Đội phản ứng nhanh rác Đắk Lắk",
+      "last_message": "Cuối tuần này gặp nhau ở hồ Ea Kao nhé!",
+      "last_message_at": "2026-10-04T09:00:00.000Z",
+      "unread_count": 0,
+      "avatar": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400"
+    }
+  ],
+  "messages": [
+    {
+      "id": "msg-001",
+      "conversation_id": "conv-001",
+      "sender_id": "user-volunteer-002",
+      "sender_name": "Nguyễn Văn Xanh",
+      "sender_avatar": "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400",
+      "text": "Chào mọi người, điểm rác ở Ea Kao đã có ai qua khảo sát chưa ạ?",
+      "created_at": "2026-10-04T08:30:00.000Z"
+    },
+    {
+      "id": "msg-002",
+      "conversation_id": "conv-001",
+      "sender_id": "user-admin-local-001",
+      "sender_name": "EcoPick Admin",
+      "sender_avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400",
+      "text": "Mình đã khảo sát rồi nhé! Cuối tuần này gặp nhau ở hồ Ea Kao nhé!",
+      "created_at": "2026-10-04T09:00:00.000Z"
+    }
+  ],
+  "redemptions": [],
+  "point_logs": [
+    {
+      "id": "log-001",
+      "user_id": "user-admin-local-001",
+      "points": 100,
+      "action": "Tham gia sự kiện dọn vệ sinh",
+      "created_at": "2026-10-03T11:00:00.000Z"
+    },
+    {
+      "id": "log-002",
+      "user_id": "user-admin-local-001",
+      "points": 50,
+      "action": "Báo cáo điểm rác mới được xác thực",
+      "created_at": "2026-10-02T15:30:00.000Z"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "notif-001",
+      "user_id": "user-admin-local-001",
+      "type": "badge",
+      "title": "Huy hiệu mới!",
+      "body": "Chúc mừng bạn đã đạt huy hiệu Tân binh Xanh 🌿",
+      "data": {
+        "badgeId": "badge-001"
+      },
+      "is_read": false,
+      "created_at": "2026-10-04T08:00:00.000Z"
+    },
+    {
+      "id": "notif-002",
+      "user_id": "user-admin-local-001",
+      "type": "event",
+      "title": "Nhắc nhở sự kiện sắp diễn ra",
+      "body": "Sự kiện Dọn rác bờ hồ Ea Kao sẽ diễn ra trong 24 giờ tới.",
+      "data": {
+        "eventId": "evt-001"
+      },
+      "is_read": true,
+      "created_at": "2026-10-03T09:00:00.000Z"
+    }
+  ],
+  "challenges": [
+    {
+      "id": "ch-001",
+      "title": "Báo cáo 1 điểm rác hôm nay",
+      "description": "Chụp ảnh và gửi tọa độ 1 điểm rác trong khu vực bạn sinh sống",
+      "reward_points": 50,
+      "target": 1,
+      "current": 1,
+      "is_completed": true
+    },
+    {
+      "id": "ch-002",
+      "title": "Tham gia 1 sự kiện xanh",
+      "description": "Đăng ký tham gia một chiến dịch môi trường cuối tuần",
+      "reward_points": 100,
+      "target": 1,
+      "current": 0,
+      "is_completed": false
+    }
+  ],
+  "reports": [
+    {
+      "id": "rep-001",
+      "user_id": "user-admin-local-001",
+      "latitude": 12.6828,
+      "longitude": 108.0378,
+      "address": "123 Lê Duẩn, TP. Buôn Ma Thuột",
+      "severity": "heavy",
+      "waste_types": [
+        "plastic",
+        "organic"
+      ],
+      "description": "Đống rác nhựa và túi nilon tồn đọng ven đường gần chợ.",
+      "status": "reported",
+      "upvote_count": 8,
+      "comment_count": 3,
+      "photo_urls": [
+        "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800"
+      ],
+      "created_at": "2026-10-03T09:15:00.000Z"
+    },
+    {
+      "id": "rep-002",
+      "user_id": "user-volunteer-002",
+      "latitude": 12.6712,
+      "longitude": 108.0456,
+      "address": "Đường Nguyễn Tất Thành, TP. Buôn Ma Thuột",
+      "severity": "medium",
+      "waste_types": [
+        "plastic",
+        "paper"
+      ],
+      "description": "Chai nhựa và ly giấy vương vãi trên thảm cỏ công viên.",
+      "status": "verified",
+      "upvote_count": 4,
+      "comment_count": 1,
+      "photo_urls": [
+        "https://images.unsplash.com/photo-1618477461853-cf6ed80fbea5?w=800"
+      ],
+      "created_at": "2026-10-04T14:20:00.000Z"
+    }
+  ],
+  "likes": [
+    {
+      "id": "like-001",
+      "post_id": "post-001",
+      "user_id": "user-volunteer-002"
+    }
+  ]
+}
