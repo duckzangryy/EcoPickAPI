@@ -60,10 +60,44 @@
   --forest:#1D4A38; --forest-soft:#E4EDE7;
   --danger:#B3261E; --radius:14px;
 }
+:root[data-theme="dark"], body.theme-dark {
+  --paper:#101713; --card:#1E2621; --ink:#F1F5F9; --muted:#94A3B8;
+  --line:#2A3830; --coffee:#D97706;
+  --forest:#20693A; --forest-soft:#1A3828;
+  --danger:#EF4444;
+}
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
-body{font-family:"Be Vietnam Pro",system-ui,sans-serif;background:var(--paper);color:var(--ink);overflow:hidden}
-#map{position:absolute;inset:0;-webkit-user-select:none;user-select:none}
+body{font-family:"Be Vietnam Pro",system-ui,sans-serif;background:var(--paper);color:var(--ink);overflow:hidden;transition:background-color .25s ease,color .25s ease}
+#map{position:absolute;inset:0;-webkit-user-select:none;user-select:none;background:var(--paper)}
+.theme-dark .leaflet-popup-content-wrapper,
+.theme-dark .leaflet-popup-tip {
+  background: #1E2621 !important;
+  color: #F1F5F9 !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important;
+}
+.theme-dark .leaflet-popup-content h3 {
+  color: #F1F5F9 !important;
+}
+.theme-dark .coords {
+  color: #34D399 !important;
+}
+:root[data-theme="dark"] .leaflet-tile-pane,
+body.theme-dark .leaflet-tile-pane {
+  filter: invert(100%) hue-rotate(180deg) brightness(80%) contrast(90%);
+}
+.theme-dark .leaflet-control-attribution {
+  background: rgba(16, 23, 19, 0.8) !important;
+  color: #94A3B8 !important;
+}
+.theme-dark .leaflet-control-attribution a {
+  color: #34D399 !important;
+}
+.theme-dark .leaflet-bar a {
+  background-color: #1E2621 !important;
+  border-bottom-color: #2A3830 !important;
+  color: #F1F5F9 !important;
+}
 #toast{position:absolute;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;transition:.3s;z-index:900;background:var(--ink);color:#fff;padding:13px 20px;border-radius:12px;font-size:13.5px;max-width:min(520px,90%);box-shadow:0 10px 30px rgba(0,0,0,.3);pointer-events:none}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 #toast.ok{background:var(--forest)}
@@ -73,14 +107,14 @@ body{font-family:"Be Vietnam Pro",system-ui,sans-serif;background:var(--paper);c
 .b-exif{background:#DDF3E2;color:#14532D}
 .b-manual{background:#FDE8CD;color:#7A4514}
 .b-outside{background:#FDE2E2;color:var(--danger)}
-.photo-marker{width:48px;height:48px;aspect-ratio:1/1;border-radius:6px;border:3px solid #fff;box-shadow:0 3px 12px rgba(0,0,0,.35);object-fit:cover;background:#ddd}.photo-marker.no-image{display:grid;place-items:center;border-radius:50%;background:#1D4A38;color:#fff;font-size:22px;font-weight:700}
+.photo-marker{width:48px;height:48px;aspect-ratio:1/1;border-radius:6px;border:3px solid #fff;box-shadow:0 3px 12px rgba(0,0,0,.35);object-fit:cover;background:#E2E8F0}.photo-marker.no-image{display:grid;place-items:center;border-radius:50%;background:#1D4A38;color:#fff;font-size:22px;font-weight:700}
 .photo-marker.outside{border-color:#E5484D}
 .photo-marker.manual{border-color:#F59E0B}
-/* Màu viền theo mức nghiêm trọng — đồng bộ với Marker của app */
-.photo-marker.sev-light{border-color:#16A34A}
-.photo-marker.sev-medium{border-color:#F59E0B}
-.photo-marker.sev-heavy{border-color:#EF4444}
-.photo-marker.sev-extreme{border-color:#8B5CF6}
+/* Màu viền & background placeholder theo mức nghiêm trọng */
+.photo-marker.sev-light{border-color:#16A34A;background:#DCFCE7}
+.photo-marker.sev-medium{border-color:#F59E0B;background:#FEF3C7}
+.photo-marker.sev-heavy{border-color:#EF4444;background:#FEE2E2}
+.photo-marker.sev-extreme{border-color:#8B5CF6;background:#F3E8FF}
 /* Google Maps Navigation Puck & Markers */
 .nav-puck-outer{width:24px;height:24px;border-radius:50%;background:rgba(26,115,232,0.28);display:flex;align-items:center;justify-content:center;animation:navPuckPulse 2s infinite ease-out}
 .nav-puck-inner{width:14px;height:14px;border-radius:50%;background:#1A73E8;border:2.5px solid #FFFFFF;box-shadow:0 1px 4px rgba(0,0,0,0.4)}
@@ -138,11 +172,30 @@ const map = L.map('map', {
   maxBoundsViscosity: 0.5
 }).setView([12.62,108.30],10);
 L.control.zoom({position:'bottomright'}).addTo(map);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map);
-L.control.scale({position:'bottomleft'}).addTo(map);
 
-// Kiểm tra nếu có tọa độ mục tiêu từ URL param (focusLat, focusLng)
+// OSM Base Map (No API Key Required, no watermarks)
+const OSM_TILE_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+const tileLayer = L.tileLayer(OSM_TILE_URL, {
+  maxZoom: 19,
+  attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+let currentTheme = 'light';
+function applyTheme(theme) {
+  currentTheme = (theme === 'dark') ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  document.body.classList.toggle('theme-dark', currentTheme === 'dark');
+  document.body.classList.toggle('theme-light', currentTheme === 'light');
+}
+
 const urlParams = new URLSearchParams(window.location.search);
+const queryTheme = urlParams.get('theme');
+const initialTheme = (queryTheme === 'light' || queryTheme === 'dark')
+  ? queryTheme
+  : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+applyTheme(initialTheme);
+L.control.scale({position:'bottomleft'}).addTo(map);
 const initLat = parseFloat(urlParams.get('lat') || urlParams.get('focusLat'));
 const initLng = parseFloat(urlParams.get('lng') || urlParams.get('focusLng'));
 let autoFitTimer = null;
@@ -326,6 +379,13 @@ window.ECOPICK_CMD = function(raw){
   if (!cmd || !cmd.type) return;
 
   if (autoFitTimer) { clearTimeout(autoFitTimer); autoFitTimer = null; }
+
+  if (cmd.type === 'ECOPICK_SET_THEME') {
+    if (cmd.theme === 'light' || cmd.theme === 'dark') {
+      applyTheme(cmd.theme);
+    }
+    return;
+  }
 
   if (cmd.type === 'ECOPICK_SET_MARKERS') {
     if (cmd.markers && cmd.markers.length > 0) {

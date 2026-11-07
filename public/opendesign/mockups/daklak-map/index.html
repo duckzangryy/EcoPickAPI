@@ -3,26 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bản đồ điểm nóng rác thải Đắk Lắk — EcoPick</title>
-<meta name="description" content="Bản đồ công khai các điểm nóng rác thải tại Đắk Lắk: vị trí, mức độ và ảnh hiện trường do cộng đồng gửi lên, cập nhật liên tục.">
+<title>Bản đồ Điểm nóng Rác thải Đắk Lắk — EcoPick</title>
+<meta name="description" content="Bản đồ số hóa điểm nóng rác thải, thẩm định ảnh hiện trường bằng AI và kết nối tình nguyện viên thu gom rác tại Đắk Lắk.">
+<meta name="theme-color" content="#FAF6EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101713" media="(prefers-color-scheme: dark)">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="theme-color" content="#1D4A38">
-<link rel="canonical" href="https://ecopick-api-iota.vercel.app/opendesign/mockups/daklak-map/">
+<link rel="canonical" href="https://ecopick-api-iota.vercel.app/">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EcoPick">
 <meta property="og:locale" content="vi_VN">
-<meta property="og:title" content="Bản đồ điểm nóng rác thải Đắk Lắk — EcoPick">
-<meta property="og:description" content="Xem vị trí, mức độ và ảnh hiện trường các điểm nóng rác thải tại Đắk Lắk trên bản đồ cộng đồng.">
-<meta property="og:url" content="https://ecopick-api-iota.vercel.app/opendesign/mockups/daklak-map/">
+<meta property="og:title" content="Bản đồ Điểm nóng Rác thải Đắk Lắk — EcoPick">
+<meta property="og:description" content="Bản đồ số hóa điểm nóng rác thải và theo dõi hiện trường thu gom rác tại Đắk Lắk.">
+<meta property="og:url" content="https://ecopick-api-iota.vercel.app/">
 <meta property="og:image" content="https://ecopick-api-iota.vercel.app/og-image.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Bản đồ điểm nóng rác thải Đắk Lắk của EcoPick">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Bản đồ điểm nóng rác thải Đắk Lắk — EcoPick">
-<meta name="twitter:description" content="Xem vị trí, mức độ và ảnh hiện trường các điểm nóng rác thải tại Đắk Lắk trên bản đồ cộng đồng.">
+<meta name="twitter:title" content="Bản đồ Điểm nóng Rác thải Đắk Lắk — EcoPick">
+<meta name="twitter:description" content="Bản đồ số hóa điểm nóng rác thải và theo dõi hiện trường thu gom rác tại Đắk Lắk.">
 <meta name="twitter:image" content="https://ecopick-api-iota.vercel.app/og-image.png">
 <meta name="twitter:image:alt" content="Bản đồ điểm nóng rác thải Đắk Lắk của EcoPick">
 <link rel="preconnect" href="https://unpkg.com" crossorigin>
@@ -36,9 +37,9 @@
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "Bản đồ điểm nóng rác thải Đắk Lắk — EcoPick",
-  "description": "Bản đồ công khai các điểm nóng rác thải tại Đắk Lắk: vị trí, mức độ và ảnh hiện trường do cộng đồng gửi lên.",
-  "url": "https://ecopick-api-iota.vercel.app/opendesign/mockups/daklak-map/",
+  "name": "Bản đồ Điểm nóng Rác thải Đắk Lắk — EcoPick",
+  "description": "Bản đồ số hóa điểm nóng rác thải, theo dõi hiện trường thu gom rác tại Đắk Lắk.",
+  "url": "https://ecopick-api-iota.vercel.app/",
   "inLanguage": "vi-VN",
   "isPartOf": {
     "@type": "WebApplication",
@@ -59,26 +60,61 @@
   --forest:#1D4A38; --forest-soft:#E4EDE7;
   --danger:#B3261E; --radius:14px;
 }
+:root[data-theme="dark"], body.theme-dark {
+  --paper:#101713; --card:#1E2621; --ink:#F1F5F9; --muted:#94A3B8;
+  --line:#2A3830; --coffee:#D97706;
+  --forest:#20693A; --forest-soft:#1A3828;
+  --danger:#EF4444;
+}
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
-body{font-family:"Be Vietnam Pro",system-ui,sans-serif;background:var(--paper);color:var(--ink);overflow:hidden}
-#map{position:absolute;inset:0;-webkit-user-select:none;user-select:none}
+body{font-family:"Be Vietnam Pro",system-ui,sans-serif;background:var(--paper);color:var(--ink);overflow:hidden;transition:background-color .25s ease,color .25s ease}
+#map{position:absolute;inset:0;-webkit-user-select:none;user-select:none;background:var(--paper)}
+.theme-dark .leaflet-popup-content-wrapper,
+.theme-dark .leaflet-popup-tip {
+  background: #1E2621 !important;
+  color: #F1F5F9 !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important;
+}
+.theme-dark .leaflet-popup-content h3 {
+  color: #F1F5F9 !important;
+}
+.theme-dark .coords {
+  color: #34D399 !important;
+}
+:root[data-theme="dark"] .leaflet-tile-pane,
+body.theme-dark .leaflet-tile-pane {
+  filter: invert(100%) hue-rotate(180deg) brightness(80%) contrast(90%);
+}
+.theme-dark .leaflet-control-attribution {
+  background: rgba(16, 23, 19, 0.8) !important;
+  color: #94A3B8 !important;
+}
+.theme-dark .leaflet-control-attribution a {
+  color: #34D399 !important;
+}
+.theme-dark .leaflet-bar a {
+  background-color: #1E2621 !important;
+  border-bottom-color: #2A3830 !important;
+  color: #F1F5F9 !important;
+}
 #toast{position:absolute;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;transition:.3s;z-index:900;background:var(--ink);color:#fff;padding:13px 20px;border-radius:12px;font-size:13.5px;max-width:min(520px,90%);box-shadow:0 10px 30px rgba(0,0,0,.3);pointer-events:none}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 #toast.ok{background:var(--forest)}
 .coords{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--forest);margin-top:3px}
 .badge{display:inline-block;font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:999px;margin-top:6px;margin-right:4px;letter-spacing:.02em}
+.cluster-bubble{display:flex;align-items:center;justify-content:center;width:100%;height:100%;border-radius:50%;background:rgba(32,105,58,.85);color:#fff;font:600 13px/1 'Be Vietnam Pro',sans-serif;border:2px solid rgba(255,255,255,.85);box-shadow:0 2px 8px rgba(0,0,0,.25);cursor:pointer}
 .b-exif{background:#DDF3E2;color:#14532D}
 .b-manual{background:#FDE8CD;color:#7A4514}
 .b-outside{background:#FDE2E2;color:var(--danger)}
-.photo-marker{width:48px;height:48px;aspect-ratio:1/1;border-radius:6px;border:3px solid #fff;box-shadow:0 3px 12px rgba(0,0,0,.35);object-fit:cover;background:#ddd}.photo-marker.no-image{display:grid;place-items:center;border-radius:50%;background:#1D4A38;color:#fff;font-size:22px;font-weight:700}
+.photo-marker{width:48px;height:48px;aspect-ratio:1/1;border-radius:6px;border:3px solid #fff;box-shadow:0 3px 12px rgba(0,0,0,.35);object-fit:cover;background:#E2E8F0}.photo-marker.no-image{display:grid;place-items:center;border-radius:50%;background:#1D4A38;color:#fff;font-size:22px;font-weight:700}
 .photo-marker.outside{border-color:#E5484D}
 .photo-marker.manual{border-color:#F59E0B}
-/* Màu viền theo mức nghiêm trọng — đồng bộ với Marker của app */
-.photo-marker.sev-light{border-color:#16A34A}
-.photo-marker.sev-medium{border-color:#F59E0B}
-.photo-marker.sev-heavy{border-color:#EF4444}
-.photo-marker.sev-extreme{border-color:#8B5CF6}
+/* Màu viền & background placeholder theo mức nghiêm trọng */
+.photo-marker.sev-light{border-color:#16A34A;background:#DCFCE7}
+.photo-marker.sev-medium{border-color:#F59E0B;background:#FEF3C7}
+.photo-marker.sev-heavy{border-color:#EF4444;background:#FEE2E2}
+.photo-marker.sev-extreme{border-color:#8B5CF6;background:#F3E8FF}
 /* Google Maps Navigation Puck & Markers */
 .nav-puck-outer{width:24px;height:24px;border-radius:50%;background:rgba(26,115,232,0.28);display:flex;align-items:center;justify-content:center;animation:navPuckPulse 2s infinite ease-out}
 .nav-puck-inner{width:14px;height:14px;border-radius:50%;background:#1A73E8;border:2.5px solid #FFFFFF;box-shadow:0 1px 4px rgba(0,0,0,0.4)}
@@ -136,11 +172,40 @@ const map = L.map('map', {
   maxBoundsViscosity: 0.5
 }).setView([12.62,108.30],10);
 L.control.zoom({position:'bottomright'}).addTo(map);
-map.fitBounds(DAKLAK_BOUNDS,{padding:[24,24]});
-map.setMaxBounds([[8.0, 100.0], [25.0, 115.0]]);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map);
+
+// OSM Base Map (No API Key Required, no watermarks)
+const OSM_TILE_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+const tileLayer = L.tileLayer(OSM_TILE_URL, {
+  maxZoom: 19,
+  attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+let currentTheme = 'light';
+function applyTheme(theme) {
+  currentTheme = (theme === 'dark') ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  document.body.classList.toggle('theme-dark', currentTheme === 'dark');
+  document.body.classList.toggle('theme-light', currentTheme === 'light');
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+const queryTheme = urlParams.get('theme');
+const initialTheme = (queryTheme === 'light' || queryTheme === 'dark')
+  ? queryTheme
+  : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+applyTheme(initialTheme);
 L.control.scale({position:'bottomleft'}).addTo(map);
-let autoFitTimer = setTimeout(()=>{map.invalidateSize();map.fitBounds(DAKLAK_BOUNDS,{padding:[24,24]});suppressMove=false;},300);
+const initLat = parseFloat(urlParams.get('lat') || urlParams.get('focusLat'));
+const initLng = parseFloat(urlParams.get('lng') || urlParams.get('focusLng'));
+let autoFitTimer = null;
+if (Number.isFinite(initLat) && Number.isFinite(initLng) && (initLat !== 0 || initLng !== 0)) {
+  map.setView([initLat, initLng], 16);
+  suppressMove = false;
+} else {
+  map.fitBounds(DAKLAK_BOUNDS,{padding:[24,24]});
+  autoFitTimer = setTimeout(()=>{map.invalidateSize();suppressMove=false;},300);
+}
 window.addEventListener('resize',()=>map.invalidateSize());
 // Nhãn tỉnh
 L.marker([12.15,108.72],{interactive:false,icon:L.divIcon({className:'',html:'<div style="font-weight:800;font-size:13px;letter-spacing:.14em;color:#7A4514;background:rgba(255,253,247,.85);border:1px solid #E7DFD2;padding:4px 12px;border-radius:999px">TỈNH ĐẮK LẮK</div>',iconSize:[120,24],iconAnchor:[60,12]})}).addTo(map);
@@ -180,17 +245,50 @@ function popupHtml(p){
 
 window.__ecopickView = function(reportId){ send({type:'ECOPICK_VIEW_REPORT', reportId:String(reportId)}); };
 
+// ponytail: grid clustering tự viết (không thêm plugin); nâng cấp leaflet.markercluster nếu cần spiderfy
+let clusterLayer = L.layerGroup().addTo(map);
+const CLUSTER_CELL = 60; // px grid
+function clusterSize(count){
+  return count >= 50 ? 52 : count >= 10 ? 46 : 40;
+}
 function renderMarkers(){
   Object.values(markers).forEach(m=>map.removeLayer(m));markers={};
-  photos.forEach(p=>{
-    if(!p.lat) return;
-    const m = L.marker([p.lat,p.lng],{icon:photoIcon(p)}).addTo(map).bindPopup(popupHtml(p));
-    m.on('click', () => {
-      send({type:'ECOPICK_SELECT_REPORT', reportId: p.id, photo: p});
+  clusterLayer.clearLayers();
+  const pts = photos.filter(p=>p.lat);
+  if (pts.length > 40){
+    const cells = new Map();
+    pts.forEach(p=>{
+      const key = [
+        Math.floor(map.project([p.lat,p.lng], map.getZoom()).x / CLUSTER_CELL),
+        Math.floor(map.project([p.lat,p.lng], map.getZoom()).y / CLUSTER_CELL),
+      ].join(',');
+      (cells.get(key) || cells.set(key, []).get(key)).push(p);
     });
-    markers[p.id]=m;
-  });
+    cells.forEach((group)=>{
+      const center = group.reduce((a,p)=>[a[0]+Number(p.lat),a[1]+Number(p.lng)],[0,0]).map(v=>v/group.length);
+      if (group.length === 1){
+        const p = group[0];
+        const m = L.marker(center,{icon:photoIcon(p)}).addTo(clusterLayer);
+        m.on('click', () => { map.closePopup(); send({type:'ECOPICK_SELECT_REPORT', reportId: p.id, photo: p}); });
+        markers[p.id]=m;
+      } else {
+        const icon = L.divIcon({className:'',html:`<div class="cluster-bubble">${group.length}</div>`,iconSize:[clusterSize(group.length),clusterSize(group.length)],iconAnchor:[clusterSize(group.length)/2,clusterSize(group.length)/2]});
+        const m = L.marker(center,{icon}).addTo(clusterLayer);
+        m.on('click', () => map.flyTo(center, Math.min(map.getZoom()+3, 18), {duration:0.5}));
+      }
+    });
+  } else {
+    pts.forEach(p=>{
+      const m = L.marker([p.lat,p.lng],{icon:photoIcon(p)}).addTo(map);
+      m.on('click', () => {
+        map.closePopup();
+        send({type:'ECOPICK_SELECT_REPORT', reportId: p.id, photo: p});
+      });
+      markers[p.id]=m;
+    });
+  }
 }
+map.on('zoomend moveend', () => { if (photos.filter(p=>p.lat).length > 40) renderMarkers(); });
 
 let navMarkers = [];
 function renderRoute(lines){
@@ -242,8 +340,16 @@ async function fetchShared(){
     const n = arr.filter(x=>x.lat).length;
     const s = JSON.stringify(arr);
     if(s!==lastSync){
-      lastSync=s;photos=arr;renderMarkers();
-      if(lastCount!==null&&n>lastCount) toast('Có '+(n-lastCount)+' ảnh mới trên bản đồ','ok');
+      lastSync=s;
+      photos=arr;
+      renderMarkers();
+      if(lastCount!==null && n>lastCount) {
+        toast('Có '+(n-lastCount)+' ảnh mới trên bản đồ','ok');
+        const latest = arr[0];
+        if (latest && latest.lat && latest.lng) {
+          map.flyTo([Number(latest.lat), Number(latest.lng)], 16, { duration: 1.0 });
+        }
+      }
       lastCount=n;
     }
   }catch(e){
@@ -272,21 +378,30 @@ window.ECOPICK_CMD = function(raw){
   try { cmd = typeof raw === 'string' ? JSON.parse(raw) : raw; } catch (e) { return; }
   if (!cmd || !cmd.type) return;
 
-  // Lệnh đầu tiên từ app thay thế vùng mặc định Đắk Lắk
   if (autoFitTimer) { clearTimeout(autoFitTimer); autoFitTimer = null; }
 
+  if (cmd.type === 'ECOPICK_SET_THEME') {
+    if (cmd.theme === 'light' || cmd.theme === 'dark') {
+      applyTheme(cmd.theme);
+    }
+    return;
+  }
+
   if (cmd.type === 'ECOPICK_SET_MARKERS') {
-    useRemote = false;
-    photos = (cmd.markers || []).map(m => ({
-      id: String(m.id),
-      lat: Number(m.latitude),
-      lng: Number(m.longitude),
-      name: m.title || 'Báo cáo',
-      severity: m.severity || '',
-      image: m.image || '',
-      hasGps: true,
-    }));
-    renderMarkers();
+    if (cmd.markers && cmd.markers.length > 0) {
+      useRemote = false;
+      if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+      photos = cmd.markers.map(m => ({
+        id: String(m.id),
+        lat: Number(m.latitude),
+        lng: Number(m.longitude),
+        name: m.title || 'Báo cáo',
+        severity: m.severity || '',
+        image: m.image || '',
+        hasGps: true,
+      }));
+      renderMarkers();
+    }
     return;
   }
 
@@ -315,6 +430,13 @@ window.ECOPICK_CMD = function(raw){
   }
 };
 
+window.addEventListener('message', (e) => {
+  try {
+    const data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+    if (data && data.type) window.ECOPICK_CMD(data);
+  } catch (err) {}
+});
+
 /** Đổi latitudeDelta (đơn vị độ) sang zoom của Leaflet. */
 function zoomFor(delta){
   if (!delta || !isFinite(delta)) return 13;
@@ -322,12 +444,7 @@ function zoomFor(delta){
   return Math.max(6, Math.min(19, Math.round(z)));
 }
 
-// Nhận lệnh điều khiển từ app (web: iframe contentWindow.postMessage)
-window.addEventListener('message', (ev) => {
-  if (ev.source && ev.data && (ev.data.type || '').startsWith('ECOPICK_')) window.ECOPICK_CMD(ev.data);
-});
-
-renderMarkers();fetchShared();setInterval(fetchShared,4000);
+renderMarkers();fetchShared();var pollTimer=setInterval(fetchShared,4000);
 send({type:'ECOPICK_READY'});
 </script>
 </body>
